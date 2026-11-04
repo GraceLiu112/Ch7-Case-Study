@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class StockTrader {
+public class StockTrader{
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(new File("tiny.txt"));
@@ -17,6 +17,7 @@ public class StockTrader {
         
         // TODO: call loadData, then printData
         loadData(in, years, months, prices);
+        loadData(in, years, months, prices);
     }
     public static void loadData(Scanner in, int[] years, int[] months, double[] prices){
 		for(int i = 0; i < years.length; i++){
@@ -27,9 +28,11 @@ public class StockTrader {
 	}
 	public static String monthName(int month){
 		String[] short = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-		return short[month - 1];
+		return short[month-1];
 	}
 	public static void printData(int[] years, int[] months, double[] prices){
-		
+		for(int i = 1; i <= 8; i++){
+			System.out.println(monthName(months[i]) + years[i] + ": " + price[i]);
+		}
 	}
 }
