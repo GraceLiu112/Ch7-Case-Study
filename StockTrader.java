@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class StockTrader{
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner in = new Scanner(new File("falling.txt"));
+        Scanner in = new Scanner(new File("sp500_1990_2025.txt"));
         String symbol = in.next();
         int n = in.nextInt();
 
@@ -18,8 +18,10 @@ public class StockTrader{
         // TODO: call loadData, then printData
         loadData(in, years, months, prices);
         printData(years, months, prices);
-        indexOfLowest(prices);
-        indexOfHighest(prices);
+        int low  = indexOfLowest(prices);
+        int high = indexOfHighest(prices);
+        System.out.printf("%s lowest: $%.2f in %s %d\n", symbol.toUpperCase(), prices[low], monthName(months[low]), years[low]);
+		System.out.printf("%s highst: $%.2f in %s %d\n", symbol.toUpperCase(), prices[high], monthName(months[high]), years[high]);
         
     }
     public static void loadData(Scanner in, int[] years, int[] months, double[] prices){
@@ -41,23 +43,23 @@ public class StockTrader{
 			System.out.printf("%s %d: $%.2f \n", monthName(months[i]), years[i], prices[i]);
 		}
 	}
-	public static void indexOfHighest(double[] prices){
-		double max = prices[0];
+	public static int indexOfHighest(double[] prices){
+		int max = 0;
 		for(int i = 1; i < prices.length; i++){
-			if(prices[i] > max){
-				max = prices[i];
+			if(prices[i] > prices[max]){
+				max = i;
 			}
 		}
-		System.out.printf("highest: $%.2f \n", max);
+		return max;
 	}
-	public static void indexOfLowest(double[] prices){
-        double min = prices[0];
+	public static int indexOfLowest(double[] prices){
+        int min = 0;
 		for(int i = 1; i < prices.length; i++){
-			if(prices[i] < min){
-				min = prices[i];
+			if(prices[i] < prices[min]){
+				min = i;
 			}
 		}
-		System.out.printf("lowest: $%.2f \n", min);
+		return min;
 	}
 	
 }
